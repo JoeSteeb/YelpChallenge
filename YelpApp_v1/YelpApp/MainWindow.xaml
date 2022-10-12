@@ -1,0 +1,66 @@
+﻿<Window x:Name="MainWindow1" x:Class="YelpApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YelpApp"
+        mc:Ignorable="d"
+        Title="Yelp App" Height="798" Width="1266" Background="Gray">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="38*"/>
+            <ColumnDefinition Width="24*"/>
+            <ColumnDefinition Width="125*"/>
+            <ColumnDefinition Width="872*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="disconnectButton" Content="Disconnect" HorizontalAlignment="Left" Width="64" Margin="59,464,0,0" Height="21" VerticalAlignment="Top" Visibility="Hidden" Click="disconnectButton_Click" Grid.Column="3"/>
+        <Label x:Name="nameTBLabel" Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,400,0,0" Visibility="Visible" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="nameLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,400,0,0" Visibility="Hidden" Grid.ColumnSpan="2" Width="202" Grid.Column="2"/>
+        <Label x:Name="useridLabel" Content="User ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,431,0,0" Visibility="Hidden" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="useridTB" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="21" Margin="44,434,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="203" Visibility="Hidden" KeyDown="useridTB_KeyDown" Grid.Column="2"/>
+        <TextBox x:Name="nameTB" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="21" Margin="44,405,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="203" Visibility="Hidden" Grid.Column="2"/>
+        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Left" Width="50" Margin="4,464,0,0" Click="loginButton_Click" Height="21" VerticalAlignment="Top" Visibility="Hidden" Grid.Column="3"/>
+        <Button x:Name="logoutButton" Content="Logout" HorizontalAlignment="Left" Width="50" Margin="4,464,0,0" Click="logoutButton_Click" Height="21" VerticalAlignment="Top" Visibility="Hidden" Grid.Column="3"/>
+        <Label x:Name="appLabel" Content="Sign In :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,374,0,0" UseLayoutRounding="True" FontWeight="Bold" FontSize="14" Visibility="Hidden" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TabControl Grid.ColumnSpan="4" Margin="10,0,10,0">
+            <TabItem Header="User Information">
+                <Grid Background="#FFE5E5E5" Height="715" Margin="0,0,4,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="148*"/>
+                        <ColumnDefinition Width="28*"/>
+                        <ColumnDefinition Width="857*"/>
+                    </Grid.ColumnDefinitions>
+                    <Menu Margin="35,39,973,474" Grid.ColumnSpan="3">
+                        <TextBlock x:Name="userTextBlock" TextWrapping="Wrap" Text="Set Current User" Width="102"/>
+                        <TextBox x:Name="userTextBox" TextWrapping="Wrap" Text="" Width="173" TextChanged="userTextBox_TextChanged"/>
+                        <ListBox x:Name="userListBox" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ListBox_SelectionChanged" Height="160" Width="174"/>
+                    </Menu>
+                    <TextBox x:Name="userNameBox" TextWrapping="Wrap" IsReadOnly="False" Grid.Column="2" Margin="80,39,684,474" TextChanged="userNameBox_TextChanged" IsEnabled="False"/>
+                    <Menu Grid.ColumnSpan="3" Margin="35,275,684,192">
+                        <TextBox TextWrapping="Wrap" Text="Friends:" Width="133" Height="26"/>
+                        <DataGrid x:Name="FriendTable" d:ItemsSource="{d:SampleData ItemCount=5}" Height="199" Width="498" SelectionChanged="FriendTable_SelectionChanged"/>
+                    </Menu>
+                    <DataGrid x:Name="LatestTipsGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="367,39,125,192" Grid.Column="2" SelectionChanged="LatestTipsGrid_SelectionChanged"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Business Search" Height="20" VerticalAlignment="Top" Margin="2,-2,-2,0">
+                <Grid Background="#FFE5E5E5" Height="481">
+                    <ListBox x:Name="stateListBox" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" VerticalAlignment="Top" Width="180" SelectionChanged="stateListBox_SelectionChanged"/>
+                    <ListBox x:Name="cityListBox" HorizontalAlignment="Left" Height="80" Margin="14,115,0,0" VerticalAlignment="Top" Width="174" SelectionChanged="cityListBox_SelectionChanged"/>
+                    <ListBox x:Name="zipListBox" HorizontalAlignment="Left" Height="80" Margin="14,221,0,0" VerticalAlignment="Top" Width="180" SelectionChanged="zipListBox_SelectionChanged"/>
+                    <ListBox x:Name="categoriesListBox" HorizontalAlignment="Left" Height="81" Margin="14,331,0,0" VerticalAlignment="Top" Width="180"  SelectionMode="Multiple" SelectionChanged="categoriesListBox_SelectionChanged"/>
+                    <DataGrid x:Name="businessDataGrid" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="649" Margin="237,10,0,0" SelectionChanged="businessDataGrid_SelectionChanged"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Canvas x:Name="LoginCanvas" Margin="206,586,364,20" Background="White" Grid.Column="3">
+            <Label x:Name="dbLabel" Content="Database :" UseLayoutRounding="True" FontWeight="Bold" FontSize="14" Canvas.Left="10" Height="28" Width="70"/>
+            <Label x:Name="usernameLabel" Content="Username:" Canvas.Left="14" Canvas.Top="28"/>
+            <Label x:Name="postgresLabel" Content="postgres" FontWeight="Bold" Width="90" Canvas.Left="85" Canvas.Top="28"/>
+            <TextBox x:Name="passwordTB" Height="21" TextWrapping="Wrap" Text="" Width="204" KeyDown="passwordTB_KeyDown" Canvas.Left="78" Canvas.Top="56"/>
+            <Label x:Name="passwordLabel" Content="Password:" Canvas.Left="12" Canvas.Top="53"/>
+            <Button x:Name="connectButton" Content="Connect" Width="64" Click="connectButton_Click" Height="21" Visibility="Visible" Canvas.Left="218" Canvas.Top="77"/>
+        </Canvas>
+
+    </Grid>
+</Window>
