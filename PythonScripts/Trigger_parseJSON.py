@@ -46,8 +46,6 @@ def writeBusinessData(data: Dict[str, any], write: Callable[[str], None]):
     categories = data["categories"].split(', ')
     write("      categories: {}\n".format(str(categories)))
 
-    # TO-DO : write your own code to process attributes
-    # make sure to **recursively** parse all attributes at all nesting levels. You should not assume a particular nesting level.
     write("      attributes: {}\n".format(
         str(flatten(data["attributes"]))))
 
